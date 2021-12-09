@@ -28,9 +28,7 @@ export class MemberDetailComponent implements OnInit {
         imageAnimation: NgxGalleryAnimation.Slide,
         preview: false
       }
-    ];
-
-    this.galleryImages = this.getImages();
+    ];    
   }
 
   getImages(): NgxGalleryImage[] {
@@ -47,7 +45,10 @@ export class MemberDetailComponent implements OnInit {
 
   loadMember() {
     this.memberService.getMember(this.route.snapshot.paramMap.get("username"))
-      .subscribe(member => this.member = member);
+      .subscribe(member => {
+        this.member = member;
+        this.galleryImages = this.getImages();
+      });    
   }
 
 }
